@@ -4,5 +4,10 @@
   "private": true,
   "type": "module",
   "description": "MurhoPrints streetwear frontend in HTML, CSS, and browser JavaScript",
-  "scripts": { "start": "node server.js", "dev": "node server.js", "check": "node scripts/check.js" }
+  "scripts": {
+    "start": "node scripts/preview.js",
+    "dev": "node scripts/preview.js",
+    "check": "node scripts/check.js",
+    "build": "node scripts/build.js"
+  }
 }

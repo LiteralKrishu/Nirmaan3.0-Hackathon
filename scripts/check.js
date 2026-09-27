@@ -7,7 +7,7 @@ import assert from 'node:assert/strict';
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 function files(dir) { return readdirSync(dir, {withFileTypes:true}).flatMap(e=>e.isDirectory()?files(resolve(dir,e.name)):[resolve(dir,e.name)]); }
 const source=files(resolve(root,'js'));
-for(const file of [...source,resolve(root,'server.js')]) {
+for(const file of [...source,resolve(root,'scripts/preview.js'),resolve(root,'scripts/build.js')]) {
   execFileSync(process.execPath,['--check',file]);
   const text=readFileSync(file,'utf8');
   for(const match of text.matchAll(/^import\s+(?:[^;\n]*?from\s*)?['"]([^'"]+)['"]/gm)) {
@@ -17,7 +17,7 @@ for(const file of [...source,resolve(root,'server.js')]) {
     const target=specifier.startsWith('/')?resolve(root,'.'+specifier):resolve(dirname(file),specifier);
     assert(existsSync(target),`${relative(root,file)}: missing import ${specifier}`);
   }
-  if(!file.includes('/vendor/'))assert(!/\bfetch\s*\(|\blocalStorage\b|\bsessionStorage\b|supabase|razorpay/i.test(text),'Unexpected backend/storage code: '+file);
+  if(file.startsWith(resolve(root,'js'))&&!file.includes('/vendor/'))assert(!/\bfetch\s*\(|\blocalStorage\b|\bsessionStorage\b|supabase|razorpay/i.test(text),'Unexpected backend/storage code: '+file);
 }
 for(const dir of ['js/app/admin','js/app/auth','js/app/login','js/app/signup','js/app/profile','js/app/checkout','js/services','js/lib/supabase'])assert(!existsSync(resolve(root,dir)),'Removed feature remains: '+dir);
 const documents=[...source.filter(f=>!f.includes('/vendor/')),...files(resolve(root,'css')),resolve(root,'index.html')];

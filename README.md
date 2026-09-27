@@ -10,7 +10,9 @@ npm start
 
 Open **http://localhost:5173**. No dependency installation or build is required. Node is used only for the optional static preview server. Use `PORT=5175 npm start` to choose another port.
 
-For hosting, serve this folder and rewrite clean routes to `index.html`. Netlify (`_redirects`) and Vercel (`vercel.json`) configurations are included. Use an HTTP server rather than opening `index.html` directly, because browser modules and clean routes need a site origin.
+For hosting, run `npm run build` and publish `dist/`. This only copies the HTML, CSS, JavaScript, fonts, and images; it does not compile or change the frontend. Netlify (`_redirects`) and Vercel (`vercel.json`) configurations are included. Vercel is explicitly configured as a static site with Framework Preset **Other**, Build Command **npm run build**, and Output Directory **dist**. Its configuration is read on the next deployment.
+
+The optional local preview server is in `scripts/preview.js`, outside the deployment output. Use an HTTP server rather than opening `index.html` directly, because browser modules and clean routes need a site origin.
 
 ## Explore
 
