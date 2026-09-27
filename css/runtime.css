@@ -1,0 +1,4 @@
+:root { --font-space: 'Space Grotesk', Arial, sans-serif; --font-syncopate: 'Syncopate', Arial, sans-serif; }
+#app { flex: 1; }
+.toast-region { position: fixed; bottom: 16px; right: 16px; z-index: 10000; display: flex; flex-direction: column; align-items: flex-end; gap: 8px; pointer-events: none; }
+.toast-message { padding: 14px 20px; max-width: min(420px,calc(100vw - 32px)); color: #fff; background: #0B0B0B; border: 1px solid rgba(255,255,255,.1); font: 700 12px var(--font-space); letter-spacing: .1em; text-transform: uppercase; box-shadow: 0 4px 20px #0002; }

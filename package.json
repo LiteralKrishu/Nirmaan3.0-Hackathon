@@ -1,0 +1,8 @@
+{
+  "name": "murhoprints-streetwear",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "MurhoPrints streetwear frontend in HTML, CSS, and browser JavaScript",
+  "scripts": { "start": "node server.js", "dev": "node server.js", "check": "node scripts/check.js" }
+}

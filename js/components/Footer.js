@@ -1,0 +1,40 @@
+import { h, Fragment } from "/js/runtime/dom.js";
+import Link from "/js/runtime/navigation.js";
+import { ArrowRight } from "/js/runtime/icons.js";
+import Logo from "/js/components/Logo.js";
+export default function Footer() {
+    return (h("footer", { className: "w-full bg-[#0B0B0B] text-white pt-16 pb-8 md:pt-24 md:pb-12 px-6 md:px-12 relative overflow-hidden mt-auto" },
+        h("div", { className: "absolute top-0 right-[-10%] w-[40vw] h-[40vw] bg-[#A6532A]/10 rounded-full blur-[120px] pointer-events-none" }),
+        h("div", { className: "w-full max-w-[1400px] mx-auto relative z-10 flex flex-col md:flex-row justify-between items-start md:items-center gap-12 md:gap-16 mb-16 md:mb-24" },
+            h("div", { className: "flex-1 flex flex-col gap-6 md:gap-8 w-full items-start justify-center" },
+                h(Link, { href: "/shop", className: "group flex items-center gap-4 text-4xl sm:text-5xl md:text-6xl lg:text-[70px] font-bold uppercase hover:text-[#A6532A] transition-colors leading-[0.85] tracking-tighter", style: { fontFamily: "var(--font-syncopate)" } },
+                    "Shop",
+                    h(ArrowRight, { className: "w-8 h-8 md:w-10 md:h-10 lg:w-12 lg:h-12 opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300" })),
+                h(Link, { href: "/faq", className: "group flex items-center gap-4 text-4xl sm:text-5xl md:text-6xl lg:text-[70px] font-bold uppercase hover:text-[#A6532A] transition-colors leading-[0.85] tracking-tighter", style: { fontFamily: "var(--font-syncopate)" } },
+                    "Support",
+                    h(ArrowRight, { className: "w-8 h-8 md:w-10 md:h-10 lg:w-12 lg:h-12 opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300" })),
+                h(Link, { href: "/terms-conditions", className: "group flex items-center gap-4 text-4xl sm:text-5xl md:text-6xl lg:text-[70px] font-bold uppercase hover:text-[#A6532A] transition-colors leading-[0.85] tracking-tighter", style: { fontFamily: "var(--font-syncopate)" } },
+                    "Legal",
+                    h(ArrowRight, { className: "w-8 h-8 md:w-10 md:h-10 lg:w-12 lg:h-12 opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300" }))),
+            h("div", { className: "flex-1 flex flex-col items-start md:items-end justify-center w-full mt-8 md:mt-0" },
+                h("h2", { className: "text-5xl sm:text-6xl md:text-7xl lg:text-[90px] font-bold text-[#A6532A] leading-[0.85] text-left md:text-right tracking-tighter", style: { fontFamily: "var(--font-syncopate)" } },
+                    "RESIST",
+                    h("br", null),
+                    "NOTHING."),
+                h("div", { className: "mt-8 md:mt-16 flex flex-col items-start md:items-end text-left md:text-right gap-6" },
+                    h(Link, { href: "/", className: "outline-none block" },
+                        h(Logo, { className: "h-10 md:h-14 w-auto drop-shadow-sm text-white hover:text-[#A6532A] transition-colors" })),
+                    h("p", { className: "text-white/60 text-[11px] font-medium max-w-[240px] leading-relaxed uppercase tracking-widest" },
+                        "Printed for expression.",
+                        h("br", null),
+                        "Designed for those who refuse to compromise.")))),
+        h("div", { className: "w-full max-w-[1400px] mx-auto border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-6" },
+            h("p", { className: "text-[10px] font-bold tracking-widest text-white/40 uppercase text-center md:text-left" },
+                "\u00A9 ",
+                new Date().getFullYear(),
+                " MURHOPRINTS. ALL RIGHTS RESERVED."),
+            h("div", { className: "flex items-center gap-6" },
+                h(Link, { href: "/privacy-policy", className: "text-white/40 hover:text-white transition-colors text-[10px] uppercase", "aria-label": "Privacy policy" }, "Privacy policy"),
+                h(Link, { href: "/terms-conditions", className: "text-white/40 hover:text-white transition-colors text-[10px] uppercase", "aria-label": "Terms" }, "Terms"),
+                h(Link, { href: "/contact-us", className: "text-white/40 hover:text-white transition-colors text-[10px] uppercase", "aria-label": "Contact" }, "Contact")))));
+}

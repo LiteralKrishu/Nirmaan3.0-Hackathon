@@ -1,0 +1,21 @@
+/** Hardcoded MurhoPrints streetwear. No API, database, accounts or payments. */
+import { normalizeProducts } from '../lib/catalog.js';
+const photo = name => `/images/streetwear/${name}.png`;
+export const categories = [
+  {id:'women',name:'Women',slug:'women',parent_id:null,image_url:photo('street-tee')},
+  {id:'men',name:'Men',slug:'men',parent_id:null,image_url:photo('street-hoodie')},
+  ...['women','men'].flatMap(parent => ['tees','hoodies','cargos','sets'].map(type => ({id:`${parent}-${type}`,name:({tees:'Graphic Tees',hoodies:'Hoodies',cargos:'Cargos',sets:'Co-ords'})[type],slug:`${parent}-${type}`,parent_id:parent,image_url:photo(({tees:'street-cream-tee',hoodies:'street-hoodie',cargos:'street-cargo',sets:'street-hoodie'})[type])}))),
+].map((item,index)=>({...item,active:true,sort_order:index,description:''}));
+const pieces = [
+ {id:'inkline-oversized-tee',name:'Inkline Oversized Tee',price:1499,type:'tees',image:'street-tee',color:'WASHED BLACK:#282724',fabric:'240 GSM cotton jersey',description:'An oversized black tee with an abstract cream line print. Dropped shoulders, a substantial ribbed neck, and room to make it your own.'},
+ {id:'concrete-hoodie',name:'Concrete Hoodie',price:2999,type:'hoodies',image:'street-hoodie',color:'OLIVE:#62654D',fabric:'400 GSM brushed cotton fleece',description:'A washed-olive pullover with a roomy hood and a clean chest print. Heavyweight fleece for late plans and slow mornings.'},
+ {id:'daily-cargo',name:'Daily Cargo',price:2499,type:'cargos',image:'street-cargo',color:'STONE:#C4B8A3',fabric:'Durable cotton twill',description:'Stone cargo trousers with a relaxed wide leg, generous pockets, and an easy everyday fit. Built around the way you actually dress.'},
+ {id:'orbit-graphic-tee',name:'Orbit Graphic Tee',price:1699,type:'tees',image:'street-cream-tee',color:'OFF WHITE:#EDE8DC',fabric:'240 GSM cotton jersey',description:'A rust orbital print on an off-white oversized tee. An expressive graphic, a boxy silhouette, and a soft lived-in feel.'},
+ {id:'rust-signature-tee',name:'Rust Signature Tee',price:1799,type:'tees',image:'hero-streetwear',color:'TERRACOTTA:#A6532A',fabric:'260 GSM garment-washed cotton',description:'An oversized terracotta graphic tee with an understated MurhoPrints signature. Easy volume, warm colour, and a broken-in handfeel.'},
+ {id:'studio-layer-set',name:'Studio Layer Set',price:4499,type:'sets',image:'street-hoodie',color:'OLIVE + CHARCOAL:#62654D',fabric:'Cotton fleece hoodie and cotton twill trousers',description:'The full off-duty uniform: a washed-olive hoodie with loose charcoal trousers. Designed to wear together or break into your own rotation.'},
+];
+export const products = normalizeProducts(pieces.map((piece,index)=>{
+ const image=photo(piece.image),bottom=piece.type==='cargos';
+ return {...piece,slug:piece.id,title:piece.name,brand:'MurhoPrints',image_url:image,category:'unisex',subcategory:piece.type,sort_order:index,created_at:`2026-09-${String(27-index).padStart(2,'0')}T00:00:00Z`,stock_count:48,active:true,is_active:true,status:'active',colors:[piece.color],product_details:piece.description,fit_details:bottom?'Relaxed through the hip with a wide leg. Check the waist and length in the size guide.':'Intentionally oversized with dropped shoulders. Take your usual size for the intended relaxed fit.',material_details:piece.fabric,care_instructions:'Wash cold, inside out, with similar colours. Air dry. Do not iron directly over the print.',sizes:bottom?['S|waist:28,length:40','M|waist:30,length:41','L|waist:32,length:42','XL|waist:34,length:43']:['S|chest:42,length:27','M|chest:44,length:28','L|chest:46,length:29','XL|chest:48,length:30'],product_images:[{id:piece.id+'-front',public_url:image,is_primary:true,sort_order:0,color:piece.color,alt_text:piece.name}],product_variants:['S','M','L','XL'].map(size=>({id:piece.id+'-'+size,sku:`MP-${index+1}-${size}`,size,color:piece.color,stock_count:12,active:true})),product_categories:['women','men',`women-${piece.type}`,`men-${piece.type}`].map(category_id=>({category_id,category:categories.find(c=>c.id===category_id)})),product_reviews:[]};
+}));
+export const getProduct=id=>products.find(p=>p.id===id||p.slug===id)||null;
